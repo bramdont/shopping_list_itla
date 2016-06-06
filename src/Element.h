@@ -13,6 +13,16 @@ class Element
 	public:
 		Element(std::string name);
 
+	Element* getNext() { return _next;	}
+
+	void setNext(Element* next) { _next = next; }
+
+	std::string getName() { return _name;	}
+
+	void setName(std::string& name) { _name = name;	}
+
+
+
 	private:
 		Element* _next;
 		std::string _name;

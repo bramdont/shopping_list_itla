@@ -14,6 +14,9 @@ class List
 		List();
 		void add(Element* element);
 		void remove(int index);
+
+	 Element* getFirst() {	return _first;	} // returns the first element of the list
+
 	private:
 		Element* _first;
 		Element* _last;

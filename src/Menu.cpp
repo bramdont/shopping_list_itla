@@ -6,8 +6,13 @@
  */
 
 #include "Menu.h"
+#include "List.h"
+#include "Element.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
+
+List* list = new List();
 
 Menu::Menu()
 {
@@ -67,20 +72,55 @@ void Menu::routeAction(int option)
 
 void Menu::listItems()
 {
-	//TODO: Implement this
-	cout << "Implement  Menu::listItems" << endl;
+	Element* i = list -> getFirst();
+	int position = 1; // to identify the position of the element
+	while (i != NULL)
+	{
+
+		cout << position++ << " - "<< i -> getName() << endl;
+		i = i -> getNext();
+	}
 }
 
 void Menu::addItems()
 {
-	//TODO: Implement this
-	cout << "Implement  Menu::addItems" << endl;
+	string name;
+
+	cout << "Type the element Name: ";
+	cin >> name;
+
+	Element* element = new Element(name);
+
+	list -> add(element); // add the element to the list
+	cout << "New element added successfully to the list";
+
 }
 
 void Menu::removeItems()
 {
-	//TODO: Implement this
-	cout << "Implement  Menu::removeItems" << endl;
+
+	int position;
+	int counter = 1;
+
+	cout << "Introduce the position of the element you want to remove: ";
+	cin >> position;
+	list -> remove(position);
+	Element* beforeTheRemoved = list -> getFirst();
+
+
+	while (counter < position ) // to get the element before the one to be remove and point
+	{								// the next after the removed one.
+		counter++;
+		beforeTheRemoved = beforeTheRemoved ->getNext();
+	}
+
+	Element* afterTheRemoved = beforeTheRemoved;
+	afterTheRemoved = afterTheRemoved -> getNext();// the actual one to be removed
+	afterTheRemoved = afterTheRemoved -> getNext();// the one after the element to be removed
+
+	beforeTheRemoved -> setNext(afterTheRemoved);
+
+
 }
 
 void Menu::show()
